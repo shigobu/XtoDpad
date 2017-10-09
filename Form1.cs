@@ -42,8 +42,11 @@ namespace XtoDpad
             PadRadiButton = new RadioButton[4] { pad1RadioButton, pad2RadioButton, pad3RadioButton, pad4RadioButton };
 
             Screen[] s = Screen.AllScreens;
-            Rectangle srect = s[1].Bounds;
-            this.Location = new Point(srect.X + srect.Width / 2 - this.Width / 2, srect.Y + srect.Height / 2 - this.Height / 2);
+            if (s.Length > 1)
+            {
+                Rectangle srect = s[1].Bounds;
+                this.Location = new Point(srect.X + srect.Width / 2 - this.Width / 2, srect.Y + srect.Height / 2 - this.Height / 2);
+            }
 
             if (!joystick.vJoyEnabled())
             {
