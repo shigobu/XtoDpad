@@ -509,10 +509,14 @@ namespace XtoDpad
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!FormCloseOK)
+            //ユーザー操作のよって閉じられるとき
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                e.Cancel = true;
-                this.WindowState = FormWindowState.Minimized;
+                if (!FormCloseOK)
+                {
+                    e.Cancel = true;
+                    this.WindowState = FormWindowState.Minimized;
+                }
             }
         }
     }
