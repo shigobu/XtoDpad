@@ -469,6 +469,19 @@ namespace XtoDpad
             this.Text = title;
         }
 
+        //コントローラーを選択させるラジオボタンのバックカラーを変更する
+        delegate void changeRadikoButtonBackColorDelegate(Color color,int index);
+
+        private void changeRadikoButtonBackColor(Color color,int index)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new changeRadikoButtonBackColorDelegate(changeRadikoButtonBackColor), color, index);
+                return;
+            }
+            this.PadRadiButton[index].BackColor = color;
+        }
+
         private void Form1_TextChanged(object sender, EventArgs e)
         {
             notifyIcon1.BalloonTipText = this.Text;
