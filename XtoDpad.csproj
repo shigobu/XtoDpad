@@ -72,9 +72,8 @@
     <Reference Include="System.Xml">
       <Private>True</Private>
     </Reference>
-    <Reference Include="vJoyInterfaceWrap, Version=0.2.1.6, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\vJoy\x64\vJoyInterfaceWrap.dll</HintPath>
+    <Reference Include="vJoyInterfaceWrap">
+      <HintPath>..\..\..\Downloads\SDK\c#\x64\vJoyInterfaceWrap.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -51,6 +51,7 @@ namespace XtoDpad
             if (!joystick.vJoyEnabled())
             {
                 MessageBox.Show("vJoy driver not enabled: Failed Getting vJoy attributes.");
+                FormCloseOK = true;
                 this.Close();
             }
             if(joystick.GetVJDButtonNumber(id) < 12)
@@ -60,6 +61,7 @@ namespace XtoDpad
                                 "エラー", 
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
+                FormCloseOK = true;
                 this.Close();
             }
 
