@@ -473,7 +473,12 @@ namespace XtoDpad
 
         //コントローラーを選択させるラジオボタンのバックカラーを変更する
         delegate void changeRadikoButtonBackColorDelegate(Color color,int index);
-
+        
+        /// <summary>
+        /// ラジオボタンの背景色を変更します。
+        /// </summary>
+        /// <param name="color">ラジオボタンの背景色</param>
+        /// <param name="index">ラジオボタンのインデックス</param>
         private void changeRadikoButtonBackColor(Color color,int index)
         {
             if (InvokeRequired)
