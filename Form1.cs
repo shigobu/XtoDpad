@@ -7,7 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 using vJoyInterfaceWrap;
@@ -27,11 +27,14 @@ namespace XtoDpad
         int TriggerThreshold = 20;
         RadioButton[] PadRadiButton = new RadioButton[4];
 
+        System.Threading.Timer ThreadTimer = null;
+
         public Form1()
         {
             InitializeComponent();
             joystick = new vJoy();
             iReport = new vJoy.JoystickState();
+            ThreadTimer = new System.Threading.Timer(new TimerCallback(timer1_Tick), null, 1000, 10);
         }
 
         bool loadingForm = false;
@@ -86,18 +89,18 @@ namespace XtoDpad
         }
 
         //タイマーティック
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object state)
         {
             //コントローラーの接続状態確認
             for (int i = 0; i < 4; i++)
             {
                 if (Xcont[i].IsConnected)
                 {
-                    PadRadiButton[i].BackColor = Color.Lime;
+                    changeRadikoButtonBackColor(Color.Lime, i);
                 }
                 else
                 {
-                    PadRadiButton[i].BackColor = SystemColors.Control;
+                    changeRadikoButtonBackColor(SystemColors.Control, i);
                 }
             }
 
@@ -483,8 +486,11 @@ namespace XtoDpad
         {
             if (InvokeRequired)
             {
-                Invoke(new changeRadikoButtonBackColorDelegate(changeRadikoButtonBackColor), color, index);
-                return;
+                if (this.IsDisposed)
+                {
+                    Invoke(new changeRadikoButtonBackColorDelegate(changeRadikoButtonBackColor), color, index);
+                    return;
+                } 
             }
             this.PadRadiButton[index].BackColor = color;
         }
@@ -516,6 +522,9 @@ namespace XtoDpad
         private void 閉じるToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormCloseOK = true;
+            ThreadTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            ThreadTimer.Dispose();
+            ThreadTimer = null;
             this.Close();
         }
 
@@ -536,6 +545,15 @@ namespace XtoDpad
                 {
                     e.Cancel = true;
                     this.WindowState = FormWindowState.Minimized;
+                }
+                else
+                {
+                    if (ThreadTimer != null)
+                    {
+                        ThreadTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                        ThreadTimer.Dispose();
+                        ThreadTimer = null;
+                    }
                 }
             }
         }
