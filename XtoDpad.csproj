@@ -73,7 +73,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="vJoyInterfaceWrap">
-      <HintPath>..\..\..\Downloads\SDK\c#\x64\vJoyInterfaceWrap.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\vJoy\x64\vJoyInterfaceWrap.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
