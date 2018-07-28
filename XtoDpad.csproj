@@ -74,7 +74,7 @@
     </Reference>
     <Reference Include="vJoyInterfaceWrap">
       <HintPath>..\..\..\..\..\..\Program Files\vJoy\x64\vJoyInterfaceWrap.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
